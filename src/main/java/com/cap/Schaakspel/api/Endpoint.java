@@ -22,4 +22,12 @@ public class Endpoint {
     public void registerPlayer(@RequestBody Player player){
         playerRepository.save(player);
     }
+
+    @PostMapping("/delete")
+    public void deletePlayer( Long id){
+        System.out.println(id);
+        long playerId = id;
+        Player x = playerRepository.findById(playerId).get();
+        playerRepository.delete(x);
+    }
 }
