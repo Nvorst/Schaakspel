@@ -1,4 +1,7 @@
-$(document).ready({});
+var editor;
+$(document).ready({
+});
+
 
 $("#btn_getPlayers").click(function getTables(){
     if($.fn.dataTable.isDataTable('#playerTable')){
@@ -11,6 +14,14 @@ $("#btn_getPlayers").click(function getTables(){
         success: function(data){
             $('#playerTable').DataTable({
                 data: data,
+          //      columnDefs:
+            //                    [
+              //                      {
+                //                    data: null,
+                  //                  defaultContent: "<button>Delete</button>",
+                    //                targets: -1
+                      //              }
+                        //        ],
                 columns:
                 [
                     {data: 'firstName'},
@@ -19,8 +30,10 @@ $("#btn_getPlayers").click(function getTables(){
                     {data: 'dateOfBirth'},
                     {data: 'matchesWon'},
                     {data: 'matchesLost'},
-                    {data: 'matchesTied'}
+                    {data: 'matchesTied'},
+                    {defaultContent: "<button>Delete</button>"}
                 ]
+
             })
         }
     })
@@ -28,8 +41,13 @@ $("#btn_getPlayers").click(function getTables(){
 
 $("#btn_registerPlayer").click(function getTables(){
     var player = {
-        firstName: 
-    }
+        firstName: $('#firstName').val(),
+        lastName: $('#lastName').val(),
+        namePreposition: $('#namePreposition').val(),
+        dateOfBirth: $('#dateOfBirth').val()
+    };
+
+    var json = JSON.stringify(player);
 
     $.ajax({
         url: "/register",
